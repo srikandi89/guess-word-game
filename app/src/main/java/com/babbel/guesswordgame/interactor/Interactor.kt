@@ -8,7 +8,11 @@ interface Interactor {
 
     fun getQuestionObservable(): Observable<WordPair>
 
+    fun getScoreObservable(): Observable<Int>
+
     fun emitOption(option: WordPair)
 
     fun emitQuestion(question: WordPair)
+
+    fun emitScore(score: Int)
 }

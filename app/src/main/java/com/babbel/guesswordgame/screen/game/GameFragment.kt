@@ -76,13 +76,30 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 showQuestion(it.translation)
             }
 
+        val disposableScores = viewModel
+            .getScoreObservable()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                updateScoreCounter(it)
+            }
+
         button_start.setOnClickListener {
             setGameButtonState(GameButtonState.PLAY)
             viewModel.nextQuestion()
         }
 
+        button_correct.setOnClickListener {
+            viewModel.submitAnswer(true)
+        }
+
+        button_wrong.setOnClickListener {
+            viewModel.submitAnswer(false)
+        }
+
         disposable.add(disposableOptions)
         disposable.add(disposableQuestion)
+        disposable.add(disposableScores)
     }
 
     override fun onDestroy() {
@@ -102,6 +119,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private fun animateTimeBar(timeBarAnimation: TimeBar) {
         timeBarAnimation.duration = DURATION
         timebar.startAnimation(timeBarAnimation)
+    }
+
+    private fun updateScoreCounter(score: Int) {
+        textview_score.text = score.toString()
     }
 
     private fun getCanvasView(): View =
