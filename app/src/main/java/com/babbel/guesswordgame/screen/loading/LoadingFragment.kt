@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.babbel.guesswordgame.R
 import com.babbel.guesswordgame.datasource.remote.RemoteRepository
+import com.babbel.guesswordgame.screen.game.GameArgs
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +33,9 @@ class LoadingFragment : Fragment(R.layout.fragment_loading) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
-                // TODO: Jump to game fragment here
+                val args = GameArgs(data)
+                val action = LoadingFragmentDirections.actionLoadingFragmentToGameFragment(args)
+                findNavController().navigate(action)
             }, { throws ->
                 Log.d(TAG, "Error ${throws.message}")
             })

@@ -18,5 +18,10 @@
         android:id="@+id/gameFragment"
         android:name="com.babbel.guesswordgame.screen.game.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="gameArgs"
+            app:argType="com.babbel.guesswordgame.screen.game.GameArgs"
+            app:nullable="true" />
+    </fragment>
 </navigation>
