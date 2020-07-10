@@ -67,6 +67,10 @@ class GameViewModel(private val interactor: Interactor) {
         nextQuestion()
     }
 
+    fun getOptionList(): List<WordPair> {
+        return options
+    }
+
     companion object {
         const val MAX_OPTIONS = 2
     }
