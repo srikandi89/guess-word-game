@@ -7,4 +7,8 @@ interface Interactor {
     fun getOptionObservable(): Observable<WordPair>
 
     fun getQuestionObservable(): Observable<WordPair>
+
+    fun emitOption(option: WordPair)
+
+    fun emitQuestion(question: WordPair)
 }

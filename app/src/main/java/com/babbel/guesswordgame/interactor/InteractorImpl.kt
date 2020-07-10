@@ -11,4 +11,12 @@ class InteractorImpl: Interactor {
     override fun getOptionObservable(): Observable<WordPair> = optionEmitter
 
     override fun getQuestionObservable(): Observable<WordPair> = questionEmitter
+
+    override fun emitOption(option: WordPair) {
+        optionEmitter.onNext(option)
+    }
+
+    override fun emitQuestion(question: WordPair) {
+        questionEmitter.onNext(question)
+    }
 }
